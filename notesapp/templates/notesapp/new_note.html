@@ -1,0 +1,57 @@
+{% extends 'notesapp/main.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>Create a new note</title>
+  
+</head>
+
+<body>
+<a href="{% url 'index' %}" class="btn btn-danger mb-2 mx-3 mt-3">Go Back</a>
+
+<h1 class="m-3 mb-4 text-center">Note</h1>
+
+<div class="mx-3">
+  
+<form method="POST">
+
+{% csrf_token %}
+
+<div>
+ {{form.title | as_crispy_field}}
+</div>
+<br>
+<div>
+{{form.description | as_crispy_field}}
+</div>
+
+<a href="{% url 'index' %}">
+  <button type="submit" class="btn btn-success mt-3">Save Note</button>
+  </a>
+</form>
+
+ <script src="{% static 'js/all.min.js' %}"></script>
+
+</div>
+
+</body>
+
+</html>
+
+{% endblock %}

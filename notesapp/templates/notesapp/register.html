@@ -1,0 +1,38 @@
+{% extends 'notesapp/main.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HTML</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+   <h1 class="bg-danger text-white p-3 h2">NoteKeeper App</h1>
+  <div class="mx-3">
+ <h2 class="text-center m-2 mb-3">Register an account</h2>
+ <form method="POST" action="">
+   {% csrf_token %}
+   
+   {{form|crispy}}
+   
+   <button type="submit" class="btn btn-success">Register</button>
+ </form>
+ 
+  <h6 class="text-center mt-4">Already have an account?<a href="{% url 'login' %}"> Login here</a></h6>
+  </div>
+ 
+</body>
+</html>
+
+{% endblock %}

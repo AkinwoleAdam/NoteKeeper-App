@@ -1,0 +1,72 @@
+{% extends 'notesapp/main.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <title>Delete Note</title>
+  
+ <link rel="stylesheet" href="{% static 'notes_app_style.css' %}">
+ 
+ <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+ 
+ <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+ 
+</head>
+
+<body>
+<a href="{% url 'index' %}">
+<button class="btn btn-danger m-3">Go Back</button>
+</a>
+
+<br>
+
+<h2 class="text-center mt-4 text-monospace m-3">Delete Note</h2>
+
+<div class="mx-3 mt-5 card text-center p-3">
+  
+  <div>
+ <h5 class="m-2 fw-bold">Note Title</h5>
+ <h3 class="">{{note.title}}</h3>
+</div>
+
+<div class="my-3">
+<h5 class="fw-bold h6">Note Description</h5>
+<h3>{{note.description}}</h3>
+</div>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<a>
+<button type="submit" class="btn btn-danger text-center">Delete Note</button>
+</a>
+
+</form>
+
+</div>
+
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'js/all.min.js' %}"></script>
+
+</body>
+
+</html>
+
+{% endblock content %}

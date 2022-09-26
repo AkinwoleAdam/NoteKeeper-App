@@ -1,0 +1,58 @@
+{% extends 'notesapp/main.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HTML</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 class="bg-danger text-white p-3 h2">NoteKeeper App</h1>
+  <h2 class="text-center mx-3 my-3">LOGIN</h2>
+  <br>
+   <div>
+   {% if messages %}
+   {% for message in messages %}
+   <div>
+<div class="alert alert-danger alert-dismissible fade show mx-3" role="alert">
+  <strong>Ouch!</strong> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+   </div>
+   {% endfor %}
+   {% endif %}
+ </div>
+  <div class="mx-3">
+     <form method="POST" action="">
+   {% csrf_token %}
+  <label for="username" class="h5">Username</label>
+   <input type="text" name="username" id="username" class="form-control" placeholder="Enter your username"required="True"/>
+   <br>
+   <br>
+    <label for="password" class="h5">Password</label>
+   <input type="password" name="password" id="password" class="form-control" required="True" />
+   <br>
+   <br>
+<button type="submit" class="btn btn-success">Login</button>
+ </form>
+ <br>
+
+ <h6 class="text-center">Don't have an account?<a href="{% url 'register' %}"> Register here</a></h6>
+ 
+  </div>
+  
+</body>
+</html>
+
+{% endblock %}
