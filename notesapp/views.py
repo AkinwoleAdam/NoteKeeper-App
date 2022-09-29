@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 from .models import Note
-from .forms import NoteForm
+from .forms import NoteForm,UpdateNoteForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.decorators import login_required
@@ -67,25 +68,36 @@ def new_note(request):
     
 @login_required(login_url='login')
 def update_note(request,pk):
-  note = Note.objects.get(id=pk)
-  form=NoteForm(instance=note)
+  try:
+    note = Note.objects.get(id=pk,user=request.user)
+  except:
+    return redirect('404')
+  form=UpdateNoteForm(instance=note)
   context = {'form':form}
   if request.method=="POST":
-    form=NoteForm(request.POST,instance=note)
+    form=UpdateNoteForm(request.POST,instance=note)
     if form.is_valid():
       update = form.save(commit=False)
       update.user = request.user
       update.save()
-      return redirect("index")          
-  return render(request,'notesapp/new_note.html',context)
+      return redirect("index")
+  return render(request,'notesapp/update_note.html',context)
  
     
 @login_required(login_url='login')
 def delete_note(request,pk):
-  note = Note.objects.get(id=pk)
+  try:
+    note = Note.objects.get(id=pk,user=request.user)
+  except:
+    return redirect('404')
   form=NoteForm(instance=note)
   context = {'form':form,'note':note}
   if request.method=="POST":
     note.delete()
     return redirect("index")
   return render(request,'notesapp/delete_note.html',context)             
+ 
+ 
+@login_required(login_url='login')  
+def notFound(request):
+  return render(request,'notesapp/404.html')

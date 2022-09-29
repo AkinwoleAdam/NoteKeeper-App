@@ -1,0 +1,32 @@
+{% extends 'notesapp/main.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load crispy_forms_filters %}
+
+{% block content %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 Not Found</title>
+</head>
+
+<body>
+   <h1 class="bg-danger text-white p-3 h2">NoteKeeper App</h1>
+  <div class="text-center mt-5">
+<h1 class="display-3">404</h1>
+<h3>Looks like you are lost!</h3>
+<a href="{% url 'index' %}" class="btn btn-danger mt-3">Go Back</a>
+</div>
+
+</body>
+
+</html>
+
+{% endblock %}
